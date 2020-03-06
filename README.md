@@ -25,8 +25,9 @@ Create the checkin handler
 -- Use the plugin procedure EC-DslDeploy :: installDslFromDirectory
 -- Overwrite true
 - Verify the operation
+- Create service account with a session key
 - Create the GitHub trigger
--- 
+- Set up a push webhook on the repo using the URL generated above
 
 
 
