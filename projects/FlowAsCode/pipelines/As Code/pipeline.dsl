@@ -6,7 +6,9 @@ pipeline 'As Code', {
     expansionDeferred = '1'
   }
 
-stage "First Stage"
+stage "1st Stage"
+stage "2nd Stage"
+
   acl {
     inheriting = '1'
   }
