@@ -1,6 +1,5 @@
 def GitConfig = "Greg's RO GitHub"
 
-serviceAccount "GitHub"
 project "/plugins/ECSCM/project",{
 	aclEntry principalName: "GitHub", principalType: "serviceAccount", executePrivilege: "allow", modifyPrivilege: "allow"
 }
@@ -8,6 +7,7 @@ project "/plugins/ECSCM/project",{
 serviceAccount "GitHub",{
 	aclEntry principalName: "project: FlowAsCode", principalType: "user", executePrivilege: "allow", modifyPrivilege: "allow"
 }
+
 project 'FlowAsCode', {
 	pipeline 'Check in handler', {
 		stage 'Checkout and Evaluate', {
