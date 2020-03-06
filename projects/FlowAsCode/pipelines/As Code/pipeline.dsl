@@ -8,6 +8,7 @@ pipeline 'As Code', {
 
 stage "1st Stage"
 stage "2nd Stage"
+stage "3rd Stage"
 
   acl {
     inheriting = '1'
