@@ -3,6 +3,9 @@ Illustrating how to manage Flow configuration as code under source control
 GitHub
 Assumes subsequent edits only in DSL code
 
+Dependencies
+- git installed on agent
+
 ***Work in progress***
 
 Create the initial DSL to be managed under source control, either directly authored in DSL or generted from a UI-authored model
@@ -16,14 +19,17 @@ When applying the DSL, use the overwrite option to make sure that the DSL is use
 Create the checkin handler
 - Use a pipeline since this is the easiest way to trigger content in Flow from source control
 - Check out code
--- Check out to .. so that the code remain in a static location, not under a job workspace
+-- Check out to ../<reponame> so that the code remain in a static location, not under a job workspace
 -- Results to /myPipelineRuntime/CheckoutCode
 - Apply the DSL
 -- Use the plugin procedure EC-DslDeploy :: installDslFromDirectory
 -- Overwrite true
 - Verify the operation
+- Create the GitHub trigger
+-- 
 
 
 
 
 [] Git configuration
+[] How got generate the DSL. Sample pipeline?

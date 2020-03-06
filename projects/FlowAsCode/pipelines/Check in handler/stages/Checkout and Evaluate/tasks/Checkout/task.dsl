@@ -3,7 +3,7 @@ task 'Checkout', {
   actualParameter = [
     'clone': '0',
     'commit': '',
-    'config': 'git public repos',
+    'config': 'gmaxey',
     'depth': '',
     'dest': '../FlowAsCode',
     'GitBranch': '',
