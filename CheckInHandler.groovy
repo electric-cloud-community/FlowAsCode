@@ -5,7 +5,7 @@ project "/plugins/ECSCM/project",{
 }
 
 serviceAccount "GitHub",{
-	aclEntry principalName: "project: FlowAsCode", principalType: "user", executePrivilege: "allow", modifyPrivilege: "allow"
+	aclEntry principalName: "project: FlowAsCode", principalType: "user", executePrivilege: "allow", modifyPrivilege: "allow", changePermissionsPrivilege: 'allow'
 }
 
 project 'FlowAsCode', {
