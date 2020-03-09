@@ -4,9 +4,11 @@ project "/plugins/ECSCM/project",{
 	aclEntry principalName: "GitHub", principalType: "serviceAccount", executePrivilege: "allow", modifyPrivilege: "allow"
 }
 
+/*
 serviceAccount "GitHub",{
 	aclEntry principalName: "project: FlowAsCode", principalType: "user", executePrivilege: "allow", modifyPrivilege: "allow", changePermissionsPrivilege: 'allow'
 }
+*/
 
 project 'FlowAsCode', {
 	pipeline 'Check in handler', {
