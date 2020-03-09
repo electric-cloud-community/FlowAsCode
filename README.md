@@ -29,6 +29,5 @@ Create the checkin handler
 - Create the GitHub trigger
 - Set up a push webhook on the repo using the URL generated above
 
-
 [] Git configuration
 [] How got generate the DSL. Sample pipeline?
