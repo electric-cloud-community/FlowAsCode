@@ -28,8 +28,8 @@ project "/plugins/ECSCM/project",{
 }
 
 project 'FlowAsCode', {
-	aclEntry principalName: ServiceAccount, principalType: "serviceAccount", executePrivilege: "allow"
 	pipeline 'Check in handler', {
+		aclEntry principalName: ServiceAccount, principalType: "serviceAccount", executePrivilege: "allow"
 		stage 'Checkout and Evaluate', {
 			colorCode = '#00adee'
 			task 'Checkout', {
