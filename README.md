@@ -1,7 +1,7 @@
 # FlowAsCode
 
 This project illustrates how CloudBee Flow configurations can be managed under source control. This repository contains two items:
-- CheckInHandler.groovy which creates the necessary content in Flow to respond to push webhooks from this repository
+- setup/CheckInHandler.groovy which creates the necessary content in Flow to respond to push webhooks from this repository
 - projects - The DSL code for a simple pipeline. This code was generated using the DSL Export Self-Service Catalog item
 
 When a push to this repository is detected in GitHub, GitHub will send Flow a webhook. This webhook will be processed by the plugin ECSCM. If it finds a match, it will run the schedule (trigger) associated with the Check in handle pipeline. This pipeine will retrieve the new source code to workspace/.. and apply the DSL there.
