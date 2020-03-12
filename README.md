@@ -8,7 +8,7 @@ When a push to this repository is detected in GitHub, GitHub will send Flow a we
 
 Dependencies
 - git installed on the local agent
-- EC-DslDeploy/2.2.1.2020030901 or later installed and promoted
+- EC-DslDeploy-2.2.0.85 or later installed and promoted
 - GitHub account
 
 Instructions
