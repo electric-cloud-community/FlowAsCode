@@ -4,11 +4,15 @@ project "/plugins/ECSCM/project",{
 	aclEntry principalName: "GitHub", principalType: "serviceAccount", executePrivilege: "allow", modifyPrivilege: "allow"
 }
 
-/*
-serviceAccount "GitHub",{
-	aclEntry principalName: "project: FlowAsCode", principalType: "user", executePrivilege: "allow", modifyPrivilege: "allow", changePermissionsPrivilege: 'allow'
+// Workaround for https://cloudbees.atlassian.net/browse/CEV-24442?filter=-2
+def NewServiceAccount="GitHub"
+def Exists=false
+getServiceAccounts().each { ServiceAccount ->
+  if (ServiceAccount.serviceAccountName==NewServiceAccount) {
+    Exists=true
+  }
 }
-*/
+if (!Exists) serviceAccount NewServiceAccount
 
 project 'FlowAsCode', {
 	pipeline 'Check in handler', {
