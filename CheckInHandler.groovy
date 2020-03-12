@@ -1,18 +1,31 @@
-def GitConfig = "Greg's RO GitHub"
+/*
+
+CloudBees Flow DSL: Manage Flow Configuration as code in source control - Checkin handler
+
+This model (Pipeline, Schedule and Service Account) will repond to push Webhooks from GitHub and evaluate DSL stored in the repository.
+
+Instructions
+- Run this DSL, e.g., 'ectool evalDsl --dslFile CheckInHandler.groovy" or from the Flow DSL editor
+
+*/
+
+def Config = "Greg's RO GitHub"
+def RepoBase = "https://github.com/"
+def Repo = "electric-cloud-community/FlowAsCode"
+def ServiceAccount="GitHub"
+
+// Workaround for https://cloudbees.atlassian.net/browse/CEV-24442?filter=-2
+def Exists=false
+getServiceAccounts().each { SA ->
+  if (SA.serviceAccountName==ServiceAccount) {
+    Exists=true
+  }
+}
+if (!Exists) serviceAccount ServiceAccount
 
 project "/plugins/ECSCM/project",{
 	aclEntry principalName: "GitHub", principalType: "serviceAccount", executePrivilege: "allow", modifyPrivilege: "allow"
 }
-
-// Workaround for https://cloudbees.atlassian.net/browse/CEV-24442?filter=-2
-def NewServiceAccount="GitHub"
-def Exists=false
-getServiceAccounts().each { ServiceAccount ->
-  if (ServiceAccount.serviceAccountName==NewServiceAccount) {
-    Exists=true
-  }
-}
-if (!Exists) serviceAccount NewServiceAccount
 
 project 'FlowAsCode', {
 	pipeline 'Check in handler', {
@@ -22,11 +35,11 @@ project 'FlowAsCode', {
 				actualParameter = [
 					'clone': '0',
 					'commit': '',
-					'config': GitConfig,
+					'config': Config,
 					'depth': '',
 					'dest': '../FlowAsCode',
 					'GitBranch': '',
-					'GitRepo': 'https://github.com/electric-cloud-community/FlowAsCode.git',
+					'GitRepo': RepoBase + Repo,
 					'overwrite': '0',
 					'tag': '',
 				]
@@ -38,6 +51,7 @@ project 'FlowAsCode', {
 				actualParameter = [
 					'directory': '../FlowAsCode',
 					'pool': 'local',
+					//'overwrite':'1'
 				]
 				subpluginKey = 'EC-DslDeploy'
 				subprocedure = 'installDslFromDirectory'
@@ -57,9 +71,9 @@ project 'FlowAsCode', {
 			ec_webhookBranch = 'master'
 			ec_webhookEventSource = 'github'
 			ec_webhookEventType = 'push'
-			ec_webhookRepositoryName = 'electric-cloud-community/FlowAsCode'
+			ec_webhookRepositoryName = Repo
 			formType = '$[/plugins/ECSCM-Git/project/scm_form/webhook]'
-			scmConfig = GitConfig
+			scmConfig = Config
 		}
 		ec_triggerPluginName = 'ECSCM-Git'
 		ec_triggerType = 'webhook'
