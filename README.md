@@ -1,7 +1,7 @@
 # FlowAsCode
 
 This project illustrates how CloudBee Flow configurations can be managed under source control. This repository contains two items:
-- setup/CheckInHandler.groovy which creates the necessary content in Flow to respond to push webhooks from this repository
+- setup/CheckInHandler.groovy which creates the necessary content in Flow to respond to push webhooks from this repository. Note that this DSL code will not be applied applied with push webhooks. It is only used to set up a Flow instance to receive webhooks. The reason that it can't be updated has to do with access controls.
 - projects - The DSL code for a simple pipeline. This code was generated using the DSL Export Self-Service Catalog item
 
 When a push to this repository is detected in GitHub, GitHub will send Flow a webhook. This webhook will be processed by the plugin ECSCM. If it finds a match, it will run the schedule (trigger) associated with the Check in handle pipeline. This pipeine will retrieve the new source code to workspace/.. and apply the DSL there.
@@ -30,3 +30,6 @@ Considerations
 - When generating DSL consider using the options suppressDefaults and supressNulls to produce more human-readable code
  - This can be done with the `ectool generateDsl --suppressDefaults true --supressNulls` command line
  - Using the Self Service Catalog item, Export DSL
+ 
+Tips
+- You can place .groovy files in the root directory and they will also be evaluated
