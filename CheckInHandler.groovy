@@ -24,10 +24,11 @@ getServiceAccounts().each { SA ->
 if (!Exists) serviceAccount ServiceAccount
 
 project "/plugins/ECSCM/project",{
-	aclEntry principalName: "GitHub", principalType: "serviceAccount", executePrivilege: "allow", modifyPrivilege: "allow"
+	aclEntry principalName: ServiceAccount, principalType: "serviceAccount", executePrivilege: "allow", modifyPrivilege: "allow"
 }
 
 project 'FlowAsCode', {
+	aclEntry principalName: ServiceAccount, principalType: "serviceAccount", executePrivilege: "allow"
 	pipeline 'Check in handler', {
 		stage 'Checkout and Evaluate', {
 			colorCode = '#00adee'
