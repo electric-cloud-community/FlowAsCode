@@ -1,36 +1,32 @@
 # FlowAsCode
-Illustrating how to manage Flow configuration as code under source control
-GitHub
-Assumes subsequent edits only in DSL code
+
+This project illustrates how CloudBee Flow configurations can be managed under source control. This repository contains two items:
+- CheckInHandler.groovy which creates the necessary content in Flow to respond to push webhooks from this repository
+- projects - The DSL code for a simple pipeline. This code was generated using the DSL Export Self-Service Catalog item
+
+When a push to this repository is detected in GitHub, GitHub will send Flow a webhook. This webhook will be processed by the plugin ECSCM. If it finds a match, it will run the schedule (trigger) associated with the Check in handle pipeline. This pipeine will retrieve the new source code to workspace/.. and apply the DSL there.
 
 Dependencies
-- git installed on agent
+- git installed on the local agent
+- EC-DslDeploy installed and promoted
+- GitHub account
 
-***Work in progress***
+Instructions
+- Clone this repository
+- Create an SCM git configuration
+- Update checkInHandler.groovy with that configuration name and the repository name
+- Run the DSL in the file CheckInHandler.groovy
+- Create a session ID
+- Edit the Check in Handler pipeline trigger and point to the session ID and copy the URL
+- Create a webhook to your repository using the URL from above
+- Push a commit to the GitHub repository
 
-Create the initial DSL to be managed under source control, either directly authored in DSL or generted from a UI-authored model
-When generating DSL consider using the options suppressDefaults and supressNulls to produce more human-readable code
-- This can be done with the `ectool generateDsl --suppressDefaults true --supressNulls` command line
-- Using the Self Service Catalog item, Export DSL
-When applying the DSL, use the overwrite option to make sure that the DSL is used as the specification and not additive
-- This can be done with the `ectool evalDsl --overwrite true` command line
-- Using the Self Service Catalog item, Import DSL
+Debugging
+- Examine the GitHub webhook request, if 200, then
+- Examine the Jobs in the plugin directory ECSCM, if the last one succeeded, then
+- Examine the latest pipeline run in FlowAsCode :: Check in handler
 
-Create the checkin handler
-- Use a pipeline since this is the easiest way to trigger content in Flow from source control
-- Check out code
--- Check out to ../<reponame> so that the code remain in a static location, not under a job workspace
--- Results to /myPipelineRuntime/CheckoutCode
-- Apply the DSL
--- Use the plugin procedure EC-DslDeploy :: installDslFromDirectory
--- Overwrite true
-- Verify the operation
-- Create service account with a session key
-- Create the GitHub trigger
-- Set up a push webhook on the repo using the URL generated above
-
-
-[] Git configuration
-[] How got generate the DSL. Sample pipeline?
-
-xxxxx
+Considerations
+- When generating DSL consider using the options suppressDefaults and supressNulls to produce more human-readable code
+ - This can be done with the `ectool generateDsl --suppressDefaults true --supressNulls` command line
+ - Using the Self Service Catalog item, Export DSL
