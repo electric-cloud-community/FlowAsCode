@@ -51,7 +51,7 @@ project 'FlowAsCode', {
 				actualParameter = [
 					'directory': '../FlowAsCode',
 					'pool': 'local',
-					//'overwrite':'1'
+					'overwrite':'1'
 				]
 				subpluginKey = 'EC-DslDeploy'
 				subprocedure = 'installDslFromDirectory'
