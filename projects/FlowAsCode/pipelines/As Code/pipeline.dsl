@@ -8,6 +8,7 @@ project "FlowAsCode",{
     }
     stage "Pre-prod",{
       colorCode = '#00adee'
+      task "Deploy"
     }
   }
 }
